@@ -38,14 +38,14 @@ song_node *insert_front(song_node *node, char *artist, char *name)
 
 int compare(const song_node *a, const song_node *b)
 {
-	return strcmp(a->artist, b->artist) == 0 ? 
-		   strcmp(a->name, b->name) : strcmp(a->artist, b->artist);
+	return strcasecmp(a->artist, b->artist) == 0 ? 
+		   strcasecmp(a->name, b->name) : strcasecmp(a->artist, b->artist);
 }
 
 int compare_data(const song_node *a, char *artist, char *name)
 {
-	return strcmp(a->artist, artist) == 0 ? 
-		   strcmp(a->name, name) : strcmp(a->artist, artist);
+	return strcasecmp(a->artist, artist) == 0 ? 
+		   strcasecmp(a->name, name) : strcasecmp(a->artist, artist);
 }
 
 
