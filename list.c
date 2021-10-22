@@ -141,7 +141,7 @@ song_node *remove_song(song_node *list, char *artist, char *name) {
     }
 
     song_node *l = list;
-    while (l->next) {
+    while(l->next) {
         if(compare_data(l->next, artist, name) == 0) {
             song_node *p = l->next;
             l->next = l->next->next;
