@@ -4,12 +4,6 @@
 
 #include "list.h"
 
-typedef struct song_node {
-	char name[100];
-	char artist[100];
-	struct song_node *next;
-} song_node;
-
 song_node *create_song(char *artist, char *name)
 {
 	song_node *node = malloc(sizeof(song_node));
@@ -129,4 +123,33 @@ song_node *find_rand(song_node *node, unsigned int seed)
 }
 
 
+song_node *free_list(song_node *list) {
+    song_node *start = list;
+    while(list) {
+        song_node *next = list->next;
+        free(list);
+        list = next;
+    }
+    return start;
+}
+
+song_node *remove_song(song_node *list, char *artist, char *name) {
+    if(compare_data(list, artist, name) == 0) {
+        song_node * l = list->next;
+        free(list);
+        return l;
+    }
+
+    song_node *l = list;
+    while (l->next) {
+        if(compare_data(l->next, artist, name) == 0) {
+            song_node *p = l->next;
+            l->next = l->next->next;
+            free(p);
+            return list;
+        }
+        l = l->next;
+    }
+    return list;
+}
 
