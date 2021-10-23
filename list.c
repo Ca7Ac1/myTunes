@@ -21,7 +21,7 @@ int len(song_node *node)
 	
 	while (node)
 	{
-		node++;
+		node = node->next;
 		size++;
 	}
 	
@@ -30,7 +30,7 @@ int len(song_node *node)
 
 song_node *insert_front(song_node *node, char *artist, char *name)
 {
-	song_node *front = create_song(node, artist);
+	song_node *front = create_song(artist, name);
 	front->next = node;
 
 	return front;
@@ -52,7 +52,7 @@ int compare_data(const song_node *a, char *artist, char *name)
 song_node *insert_order(song_node *node, char *artist, char *name)
 {
 	song_node *front = node;
-	song_node *insert = create_song(name, artist);
+	song_node *insert = create_song(artist, name);
 	
 	if (node == NULL || compare(insert, node) <= 0)
 	{
@@ -68,6 +68,7 @@ song_node *insert_order(song_node *node, char *artist, char *name)
 			node->next = insert;
 			return front;
 		}
+		node = node->next;
 	}
 	
 	node->next = insert;
@@ -80,11 +81,16 @@ void print_list(song_node *node)
 	
 	while (node)
 	{
-		printf("%s, %s", node->artist, node->name);
-		                                                                                                                                                                                                                         
+		print_node(node);
+		if(node->next) printf(" | ");
+		node = node->next;                                                                                                                                                                                                                       
 	}
 	
 	printf(" ]");
+}
+
+void print_node(song_node *node) {
+	printf("{%s, %s}", node->artist, node->name);
 }
 
 song_node *find(song_node *node, char *artist, char *name)
