@@ -8,6 +8,15 @@ typedef struct library
 	song_node *data[27];
 } library;
 
+int get_index(char *);
 library *create_lib();
-library *add_song(const char *, const char *)
+library *add_song(library *, const char *, const char *);
+library *delete_song(library *, const char *, const char *);
+library *free(library *);
+song_node *search_song(const library *, const char *, const char *);
+song_node *search_artist(const library *, const char *);
+void print_lib_entries(const library *, char);
+void print_lib_artist(const library *, char *);
+void shuffle(const library *);
+
 #endif
