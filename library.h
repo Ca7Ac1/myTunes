@@ -3,7 +3,8 @@
 
 #include "list.h"
 
-typedef struct library {
+typedef struct library
+{
 	song_node **data;
 } library;
 
