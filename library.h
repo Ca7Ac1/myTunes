@@ -5,9 +5,9 @@
 
 typedef struct library
 {
-	song_node **data;
+	song_node *data[27];
 } library;
 
 library *create_lib();
-
+library *add_song(const char *, const char *)
 #endif

@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #include "list.h"
 
-song_node *create_song(char *artist, char *name)
+song_node *create_song(const char *artist, const char *name)
 {
 	song_node *node = malloc(sizeof(song_node));
 	strcpy(node->name, name);
@@ -15,7 +16,7 @@ song_node *create_song(char *artist, char *name)
 	return node;
 }
 
-int len(song_node *node)
+int len(const song_node *node)
 {
 	int size = 0;
 
@@ -28,7 +29,7 @@ int len(song_node *node)
 	return size;
 }
 
-song_node *insert_front(song_node *node, char *artist, char *name)
+song_node *insert_front(const song_node *node, const char *artist, const char *name)
 {
 	song_node *front = create_song(artist, name);
 	front->next = node;
@@ -41,12 +42,12 @@ int compare(const song_node *a, const song_node *b)
 	return strcasecmp(a->artist, b->artist) == 0 ? strcasecmp(a->name, b->name) : strcasecmp(a->artist, b->artist);
 }
 
-int compare_data(const song_node *a, char *artist, char *name)
+int compare_data(const song_node *a, const char *artist, const char *name)
 {
 	return strcasecmp(a->artist, artist) == 0 ? strcasecmp(a->name, name) : strcasecmp(a->artist, artist);
 }
 
-song_node *insert_order(song_node *node, char *artist, char *name)
+song_node *insert_order(song_node *node, const char *artist, const char *name)
 {
 	song_node *front = node;
 	song_node *insert = create_song(artist, name);
@@ -72,7 +73,7 @@ song_node *insert_order(song_node *node, char *artist, char *name)
 	return front;
 }
 
-void print_list(song_node *node)
+void print_list(const song_node *node)
 {
 	printf("[ ");
 
@@ -91,12 +92,12 @@ void print_list(song_node *node)
 	printf(" ]");
 }
 
-void print_node(song_node *node)
+void print_node(const song_node *node)
 {
 	printf("{%s, %s}", node->artist, node->name);
 }
 
-song_node *find(song_node *node, char *artist, char *name)
+song_node *find(const song_node *node, const char *artist, const char *name)
 {
 	while (node)
 	{
@@ -111,7 +112,7 @@ song_node *find(song_node *node, char *artist, char *name)
 	return NULL;
 }
 
-song_node *find_first(song_node *node, char *artist)
+song_node *find_first(const song_node *node, const char *artist)
 {
 	while (node)
 	{
@@ -126,9 +127,17 @@ song_node *find_first(song_node *node, char *artist)
 	return NULL;
 }
 
-song_node *find_rand(song_node *node, unsigned int seed)
+song_node *find_rand(const song_node *node)
 {
-	srand(seed);
+	srand(time(NULL));
+
+	int i;
+	for (i = rand() % len(node); i > 0; i--)
+	{
+		node = node->next;
+	}
+
+	return node;
 }
 
 song_node *free_list(song_node *list)
