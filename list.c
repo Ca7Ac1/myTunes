@@ -89,6 +89,27 @@ void print_list(const song_node *node)
 	printf(" ]");
 }
 
+void print_list_artist(const song_node *node, const char *artist)
+{
+	node = find_first(node, artist);
+	
+	printf("[ ");
+
+	while (node)
+	{
+		print_node(node);
+
+		if (node->next)
+		{
+			printf(" | ");
+		}
+		
+		node = node->next;
+	}
+
+	printf(" ]");
+}
+
 void print_node(const song_node *node)
 {
 	printf("{%s, %s}", node->artist, node->name);

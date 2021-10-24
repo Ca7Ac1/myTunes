@@ -12,6 +12,7 @@ int len(const song_node *);
 int compare(const song_node *, const song_node *);
 int compare_date(const song_node *, char *, char *);
 void print_list(const song_node *);
+void print_list_artist(const song_node *, const char *);
 void print_node(const song_node *);
 song_node *insert_order(song_node *, const  char *, const  char *);
 song_node *create_song(const char *, const char *);
