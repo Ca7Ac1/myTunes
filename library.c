@@ -62,9 +62,29 @@ void print_lib(const library *lib)
 	}
 }
 
-void shuffle()
+void shuffle(const library *lib)
 {
+	srand(time(NULL));
 
+	int i;
+	for (i = 0; i < 27; i++)
+	{
+		if (rand() % 2 == 0) 
+		{
+			song_node *node = lib->data[i];
+
+			while (node)
+			{
+				if (rand() % 2 == 0)
+				{
+					print_node(node);
+					printf("\n");
+				}
+
+				node = node->next;
+			}
+		}
+	}
 }
 
 library *delete_song(library *lib, const char *artist, const char *name)
