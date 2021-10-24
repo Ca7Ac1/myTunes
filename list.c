@@ -50,26 +50,23 @@ int compare_data(const song_node *a, const char *artist, const char *name)
 song_node *insert_order(song_node *node, const char *artist, const char *name)
 {
 	song_node *front = node;
-	song_node *insert = create_song(artist, name);
 
-	if (node == NULL || compare(insert, node) <= 0)
+	if (node == NULL || compare_data(node, artist, name) <= 0)
 	{
-		insert->next = front;
-		return insert;
+		return insert_front(node, artist, name);
 	}
 
 	while (node->next)
 	{
-		if (compare(insert, node->next) <= 0)
+		if (compare_data(node->next, artist, name) <= 0)
 		{
-			insert->next = node->next;
-			node->next = insert;
+			node->next = insert_front(node->next, artist, name);
 			return front;
 		}
 		node = node->next;
 	}
 
-	node->next = insert;
+	node->next = create_song(artist, name);
 	return front;
 }
 
