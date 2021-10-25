@@ -29,6 +29,15 @@ int main() {
     print_node(find_first(list, "Jaymes Young"));
     printf("\n\n\n");
 
+    printf("Random:\n");
+    print_node(find_rand(list));
+    printf("\n");
+    print_node(find_rand(list));
+    printf("\n");
+    print_node(find_rand(list));
+    printf("\n\n");
+
+
     printf("Remove_song:\n\n");
     printf("Original List:\n");
     print_list(list);

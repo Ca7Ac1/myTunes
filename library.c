@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
+#include <time.h>
 
 #include "library.h"
 #include "list.h"
@@ -19,9 +21,10 @@ library *create_lib()
 	return lib;
 }
 
-int get_index(char *artist)
+int get_index(const char *artist)
 {
-	return tolower(*artist) < 'a' || twolower(*artist) > 'z' ? 26 : tolower(*artist) - 'a';
+	char letter = artist[0];
+	return tolower(letter) < 'a' || tolower(letter) > 'z' ? 26 : tolower(letter) - 'a';
 }
 
 library *add_song(library *lib, const char *artist, const char *name)
@@ -89,10 +92,10 @@ void shuffle(const library *lib)
 
 library *delete_song(library *lib, const char *artist, const char *name)
 {
-	delete_song(lib->data[get_index(artist)], artist, name);
+	remove_song(lib->data[get_index(artist)], artist, name);
 }
 
-library *free(library *lib)
+library *free_lib(library *lib)
 {
 	int i;
 	for (i = 0; i < 27; i++)

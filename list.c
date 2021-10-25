@@ -158,7 +158,7 @@ song_node *find_rand(const song_node *node)
 	return node;
 }
 
-song_node *free_list(song_node *list)
+song_node *free_list(const song_node *list)
 {
 	song_node *start = list;
 	while (list)
@@ -170,7 +170,7 @@ song_node *free_list(song_node *list)
 	return start;
 }
 
-song_node *remove_song(song_node *list, char *artist, char *name)
+song_node *remove_song(const song_node *list, const char *artist, const char *name)
 {
 	if (compare_data(list, artist, name) == 0)
 	{

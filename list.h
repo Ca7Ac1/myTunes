@@ -16,7 +16,7 @@ void print_list_artist(const song_node *, const char *);
 void print_node(const song_node *);
 song_node *insert_order(song_node *, const  char *, const  char *);
 song_node *create_song(const char *, const char *);
-song_node *insert_front(song_node *, char *, char *);
+song_node *insert_front(const song_node *, const char *, const char *);
 song_node *find(const song_node *, const char *, const char *);
 song_node *find_first(const song_node *, const char *);
 song_node *find_rand(const song_node *);
