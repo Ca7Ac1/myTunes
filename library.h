@@ -17,6 +17,7 @@ song_node *search_song(const library *, const char *, const char *);
 song_node *search_artist(const library *, const char *);
 void print_lib_entries(const library *, char);
 void print_lib_artist(const library *, char *);
+void print_lib(const library *);
 void shuffle(const library *);
 
 #endif

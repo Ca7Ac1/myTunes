@@ -83,28 +83,28 @@ void print_list(const song_node *node)
 		{
 			printf(" | ");
 		}
-		
+
 		node = node->next;
 	}
 
 	printf(" ]");
 }
 
-void print_list_artist(const song_node *node, const char *artist)
+void print_list_artist(song_node *node, const char *artist)
 {
 	node = find_first(node, artist);
-	
+
 	printf("[ ");
 
-	while (node)
+	while (node && strcasecmp(node->artist, artist) == 0)
 	{
 		print_node(node);
 
-		if (node->next)
+		if (node->next && strcasecmp(node->next->artist, artist) == 0)
 		{
 			printf(" | ");
 		}
-		
+
 		node = node->next;
 	}
 
@@ -116,7 +116,7 @@ void print_node(const song_node *node)
 	printf("{%s, %s}", node->artist, node->name);
 }
 
-song_node *find(const song_node *node, const char *artist, const char *name)
+song_node *find(song_node *node, const char *artist, const char *name)
 {
 	while (node)
 	{
@@ -131,7 +131,7 @@ song_node *find(const song_node *node, const char *artist, const char *name)
 	return NULL;
 }
 
-song_node *find_first(const song_node *node, const char *artist)
+song_node *find_first(song_node *node, const char *artist)
 {
 	while (node)
 	{
@@ -146,7 +146,7 @@ song_node *find_first(const song_node *node, const char *artist)
 	return NULL;
 }
 
-song_node *find_rand(const song_node *node)
+song_node *find_rand(song_node *node)
 {
 
 	int i;

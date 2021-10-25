@@ -7,7 +7,6 @@
 #include "library.h"
 #include "list.h"
 
-
 library *create_lib()
 {
 	srand(time(NULL));
@@ -31,7 +30,7 @@ int get_index(const char *artist)
 library *add_song(library *lib, const char *artist, const char *name)
 {
 	int index = get_index(artist);
-	insert_order(lib->data[index], artist, name);
+	lib->data[index] = insert_order(lib->data[index], artist, name);
 
 	return lib;
 }
@@ -68,12 +67,10 @@ void print_lib(const library *lib)
 
 void shuffle(const library *lib)
 {
-	srand(time(NULL));
-
 	int i;
 	for (i = 0; i < 27; i++)
 	{
-		if (rand() % 2 == 0) 
+		if (rand() % 2 == 0)
 		{
 			song_node *node = lib->data[i];
 
@@ -93,7 +90,8 @@ void shuffle(const library *lib)
 
 library *delete_song(library *lib, const char *artist, const char *name)
 {
-	remove_song(lib->data[get_index(artist)], artist, name);
+	lib->data[get_index(artist)] = remove_song(lib->data[get_index(artist)], artist, name);
+	return lib;
 }
 
 library *free_lib(library *lib)
@@ -101,9 +99,8 @@ library *free_lib(library *lib)
 	int i;
 	for (i = 0; i < 27; i++)
 	{
-		free_list(lib->data[i]);
+		lib->data[i] = free_list(lib->data[i]);
 	}
 
-	free(lib);
-	return NULL;
+	return lib;
 }
