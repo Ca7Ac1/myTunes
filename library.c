@@ -10,6 +10,7 @@
 
 library *create_lib()
 {
+	srand(time(NULL));
 	library *lib = malloc(sizeof(library));
 
 	int i;
